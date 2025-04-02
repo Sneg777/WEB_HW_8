@@ -19,7 +19,7 @@ def search_by_author(name):
         redis_client.setex(f"author:{name}", 3600, result)
         print(result)
     else:
-        print("Автор не найден")
+        print("Aouthor not found")
 
 
 def search_by_tag(tag):
@@ -32,5 +32,5 @@ def search_by_tag(tag):
 
     quotes = quotes_collection.find({"tags": {"$regex": f"^{tag}", "$options": "i"}})
     result = "\n".join([q["quote"] for q in quotes])
-    redis_client.setex(f"tag:{tag}", 3600, result)
+    redis_client.setex(f"tag:{tag}", 600, result)
     print(result)
