@@ -16,7 +16,7 @@ def search_by_author(name):
     if author:
         quotes = quotes_collection.find({"author": ObjectId(author["_id"])});
         result = "\n".join([q["quote"] for q in quotes])
-        redis_client.setex(f"author:{name}", 3600, result)  # Кешируем на 1 час
+        redis_client.setex(f"author:{name}", 3600, result)
         print(result)
     else:
         print("Автор не найден")
